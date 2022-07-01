@@ -1,0 +1,243 @@
+2021270141745-I-INFO gc_GenericConversion:  -------------- Generic Conversion Started: oe9z03010 ------------
+2021270141745-I-INFO GCO_STIS: Starting...
+2021270141745-I-INFO GCO_poll_status: ===================================================================
+2021270141745-I-INFO GCO_poll_status: -------------- Generic Conversion Processing: oe9z03010 ------------- 
+2021270141745-I-INFO -------------- Generic Conversion Started: oe9z03010:oe9z03c9q -------------
+2021270122233-I-INFO -------------- Data Partitioning Started: oe9z03c9q ------------
+2021270122235-I-INFO Partitioning from POD file: lz_4905_258_0000181121
+2021270122235-I-INFO OSF_PROCESSING: for oe9z03c9q
+2021270122236-I-INFO DP_dan_present:  DAN file found- will archive pod and dan files
+2021270122244-I-INFO DPI_task::DP_close_oldobs:  SDF lines = 1087, expected pkts = 1088 (single readout), total pkts = 1088
+2021270122245-I-INFO DPI_task::DP_close_oldobs:  1087 Science packets, 1 Engineering (ULX) packets, 0 Bad pkts
+2021270122250-I-INFO DP_close_files:  ...oe9z03c9q.pkx was closed
+2021270122252-I-INFO DP_close_files:  ...oe9z03c9q.bdx was closed
+2021270122256-I-INFO DP_close_files:  ...oe9z03c9q.ulx was closed
+2021270122259-I-INFO DP_close_files:  ...oe9z03c9q.pki was closed
+2021270122303-I-INFO DP_close_files:  ...oe9z03c9q.uli was closed
+2021270122315-I-INFO DPI_task::DP_close_oldobs:  Copied ...oe9z03cdq.shx to ...oe9z03c9q.shx
+2021270122316-I-INFO DPI_task::DP_close_oldobs:  -------------- Data Partitioning Ended:   oe9z03c9q ------------
+2021270141743-I-INFO ss_SupportSchedule:  -------------- Support Schedule Started: oe9z03c9q ------------
+2021270141743-I-INFO ss_SupportSchedule:  -------------- Support Schedule Completed: oe9z03c9q ------------
+2021270141744-I-INFO dv_DataValidation:  -------------- Data Validation Started: oe9z03c9q ------------
+2021270141744-I-INFO dv_Instrument::assign_first_key: from qolink_sms.start_time= 2021.270:11:01:42
+2021270141744-I-INFO dv_Instrument::assign_first_key: assigned first_keys for 2021.270:11:01:42 using yurintab date: 2018.249:22:15:00
+2021270141744-I-INFO dv_STIS::compare:  Mismatched weight (0) was lower than threshold (55)
+2021270141744-I-INFO dv_DataValidation:  -------------- Data Validation Completed: oe9z03c9q ------------
+2021270141744-I-INFO ----------- World Coordinate System Started: oe9z03c9q ---------
+2021270141744-I-INFO ----------- World Coordinate System Ended:   oe9z03c9q ---------
+2021270141745-I-INFO GC_load_...s: ...oe9z03c9q.dvx maxgroup=1
+2021270141745-I-INFO GC_load_...s: ...oe9z03c9q.dgx maxgroup=0
+2021270141745-I-INFO GC_load_...s: ...oe9z03c9q.dcx maxgroup=1
+2021270141745-I-INFO GCO_init_obs: oe9z03c9q is a WAVECAL
+2021270141745-I-INFO -------------- Generic Conversion Completed: oe9z03c9q -------------
+2021270141745-I-INFO -------------- Generic Conversion Started: oe9z03010:oe9z03cfq -------------
+2021270140034-I-INFO -------------- Data Partitioning Started: oe9z03cfq ------------
+2021270140034-I-INFO Partitioning from POD file: lz_4906_253_0000181135
+2021270140034-I-INFO OSF_PROCESSING: for oe9z03cfq
+2021270140034-I-INFO DP_dan_present:  DAN file found- will archive pod and dan files
+2021270140040-I-INFO DPI_task::DP_close_oldobs:  SDF lines = 4347, expected pkts = 4348 (single readout), total pkts = 4348
+2021270140041-I-INFO DPI_task::DP_close_oldobs:  4347 Science packets, 1 Engineering (ULX) packets, 0 Bad pkts
+2021270140042-I-INFO DP_close_files:  ...oe9z03cfq.pkx was closed
+2021270140042-I-INFO DP_close_files:  ...oe9z03cfq.bdx was closed
+2021270140042-I-INFO DP_close_files:  ...oe9z03cfq.ulx was closed
+2021270140042-I-INFO DP_close_files:  ...oe9z03cfq.pki was closed
+2021270140042-I-INFO DP_close_files:  ...oe9z03cfq.uli was closed
+2021270140042-I-INFO DPI_task::DP_close_oldobs:  Copied ...oe9z03cgq.shx to ...oe9z03cfq.shx
+2021270140042-I-INFO DPI_task::DP_close_oldobs:  -------------- Data Partitioning Ended:   oe9z03cfq ------------
+2021270140832-I-INFO ...oe9z03cfq.pkx exists and will be APPENDED to.
+2021270140832-I-INFO ...oe9z03cfq.ulx exists and will be APPENDED to.
+2021270140832-I-INFO ...oe9z03cfq.pki exists and will be APPENDED to.
+2021270140832-I-INFO ...oe9z03cfq.uli exists and will be APPENDED to.
+2021270140832-I-INFO ...oe9z03cfq.erx exists and will be APPENDED to.
+2021270140832-I-INFO -------------- Data Partitioning Started: oe9z03cfq ------------
+2021270140832-I-INFO Partitioning from POD file: lz_4907_254_0000181137
+2021270140832-I-INFO DP_dan_present:  DAN file found- will archive pod and dan files
+2021270140832-I-INFO DPI_task::DP_close_oldobs:  SDF lines = 4347, expected pkts = 4348 (single readout), total pkts = 4348
+2021270140832-I-INFO DPI_task::DP_close_oldobs:  4347 Science packets, 1 Engineering (ULX) packets, 0 Bad pkts
+2021270140832-I-INFO DP_close_files:  ...oe9z03cfq.pkx was closed
+2021270140832-I-INFO DP_close_files:  ...oe9z03cfq.bdx was closed
+2021270140832-I-INFO DP_close_files:  ...oe9z03cfq.ulx was closed
+2021270140832-I-INFO DP_close_files:  ...oe9z03cfq.pki was closed
+2021270140832-I-INFO DP_close_files:  ...oe9z03cfq.uli was closed
+2021270140832-I-INFO DPI_task::DP_close_oldobs:  Copied ...oe9z03cgq.shx to ...oe9z03cfq.shx
+2021270140832-I-INFO DPI_task::DP_close_oldobs:  -------------- Data Partitioning Ended:   oe9z03cfq ------------
+2021270140834-I-INFO ...oe9z03cfq.pkx exists and will be APPENDED to.
+2021270140834-I-INFO ...oe9z03cfq.ulx exists and will be APPENDED to.
+2021270140834-I-INFO ...oe9z03cfq.pki exists and will be APPENDED to.
+2021270140834-I-INFO ...oe9z03cfq.uli exists and will be APPENDED to.
+2021270140834-I-INFO ...oe9z03cfq.erx exists and will be APPENDED to.
+2021270140834-I-INFO -------------- Data Partitioning Started: oe9z03cfq ------------
+2021270140834-I-INFO Partitioning from POD file: lz_4908_253_0000181139
+2021270140834-I-INFO DP_dan_present:  DAN file found- will archive pod and dan files
+2021270140835-I-INFO DPI_task::DP_close_oldobs:  SDF lines = 8693, expected pkts = 8694 (single readout), total pkts = 8694
+2021270140835-I-INFO DPI_task::DP_close_oldobs:  8693 Science packets, 1 Engineering (ULX) packets, 0 Bad pkts
+2021270140835-I-INFO DP_close_files:  ...oe9z03cfq.pkx was closed
+2021270140835-I-INFO DP_close_files:  ...oe9z03cfq.bdx was closed
+2021270140835-I-INFO DP_close_files:  ...oe9z03cfq.ulx was closed
+2021270140835-I-INFO DP_close_files:  ...oe9z03cfq.pki was closed
+2021270140835-I-INFO DP_close_files:  ...oe9z03cfq.uli was closed
+2021270140835-I-INFO DPI_task::DP_close_oldobs:  Copied ...oe9z03cgq.shx to ...oe9z03cfq.shx
+2021270140835-I-INFO DPI_task::DP_close_oldobs:  -------------- Data Partitioning Ended:   oe9z03cfq ------------
+2021270141743-I-INFO ss_SupportSchedule:  -------------- Support Schedule Started: oe9z03cfq ------------
+2021270141743-I-INFO ss_SupportSchedule:  -------------- Support Schedule Completed: oe9z03cfq ------------
+2021270141744-I-INFO dv_DataValidation:  -------------- Data Validation Started: oe9z03cfq ------------
+2021270141744-I-INFO dv_Instrument::assign_first_key: from qolink_sms.start_time= 2021.270:11:15:24
+2021270141744-I-INFO dv_Instrument::assign_first_key: assigned first_keys for 2021.270:11:15:24 using yurintab date: 2018.249:22:15:00
+2021270141744-I-INFO dv_STIS::compare:  Mismatched weight (0) was lower than threshold (55)
+2021270141744-I-INFO dv_DataValidation:  -------------- Data Validation Completed: oe9z03cfq ------------
+2021270141744-I-INFO ----------- World Coordinate System Started: oe9z03cfq ---------
+2021270141744-I-INFO ----------- World Coordinate System Ended:   oe9z03cfq ---------
+2021270141745-I-INFO GC_load_...s: ...oe9z03cfq.dvx maxgroup=3
+2021270141745-I-INFO GC_load_...s: ...oe9z03cfq.dgx maxgroup=0
+2021270141745-I-INFO GC_load_...s: ...oe9z03cfq.dcx maxgroup=3
+2021270141746-I-INFO GCO_decode_ttag: Found first coarsetime in dump at 0: 8115F4E6
+2021270141746-I-INFO GCO_decode_ttag: First fill detected at 469004
+2021270141746-I-INFO  Dump 0, First=8115F4E6  Last=811631D6  LoneFine=0
+2021270141746-I-INFO GCO_decode_ttag: Found first coarsetime in dump at 11: 811631D7
+2021270141746-I-INFO GCO_decode_ttag: First fill detected at 432136
+2021270141746-I-INFO  Dump 1, First=811631D7  Last=81166EB1  LoneFine=11
+2021270141746-I-INFO GCO_decode_ttag: Found first coarsetime in dump at 12: 81166EB2
+2021270141746-I-INFO GCO_decode_ttag: First fill detected at 861439
+2021270141746-I-INFO  Dump 2, First=81166EB2  Last=8116E2B7  LoneFine=12
+2021270141746-I-INFO Scan of 3 dumps is complete
+2021270141746-I-INFO FITS file opened: ...oe9z03010_tag.fits
+2021270141746-I-INFO PRIMARY ...s of ttag file written
+2021270141746-I-INFO FITS ttag file opened successfully
+2021270141746-I-INFO FITS ttag table 1 opened successfully
+2021270141746-I-INFO write_ttag Begin      End  Bad Fine Fine Buff      Total
+2021270141746-I-INFO write_ttag  Time     Time  Crs Roll Drop Full    Photons
+2021270141746-I-INFO GCO_parse_ttag: Goodtime added: 15F4E67A 
+2021270141746-I-INFO GCO_write_ttag: Dump  0     0.00   499.20    0   20    1    0     453402
+2021270141747-I-INFO GCO_write_ttag: Dump  1   499.23   997.73    0   25    1    0     416557
+2021270141747-I-INFO GCO_write_ttag: Dump  2   997.76  1948.19    0   37    2    0     831737
+2021270141747-I-INFO FITS ttag file written successfully
+2021270141747-I-INFO FITS goodtimes table opened successfully
+2021270141747-I-INFO GTI interval: 0.015250  1948.214375
+2021270141747-I-INFO sum of goodtime intervals = 1948.199125 1
+2021270141747-I-INFO FITS goodtimes table written successfully
+2021270141747-I-INFO ------------------
+2021270141747-I-INFO total photon count = 1701696
+2021270141747-I-INFO fill count         = 3
+2021270141747-I-INFO events ignored     = 0
+2021270141747-I-INFO ------------------
+2021270141747-I-INFO image photons      = 1701696
+2021270141747-I-INFO doppler shifted    = 0
+2021270141747-I-INFO pixel overflow     = 0
+2021270141747-I-INFO ------------------
+2021270141747-I-INFO interrupt count    = 0
+2021270141747-I-INFO goodtimes count    = 1
+2021270141747-I-INFO ------------------
+2021270141747-I-INFO corrupt finetimes  = 0
+2021270141747-I-INFO finetime rollovers = 82
+2021270141747-I-INFO finetime dropbacks = 4
+2021270141747-I-INFO buffer full flags  = 0
+2021270141747-I-INFO negative time steps= 0
+2021270141747-I-INFO ------------------
+2021270141747-I-INFO Extension 1 : 1701696 4
+2021270141747-I-INFO FITS ttag image written successfully
+2021270141747-I-INFO -------------- Generic Conversion Completed: oe9z03cfq -------------
+2021270141747-I-INFO GCO_STIS: -------------- Generic Conversion Completed: oe9z03010 ------------- 
+2021270141747-I-INFO gc_GenericConversion:  -------------- Generic Conversion Completed: oe9z03010 ------------
+2021270141903-I-INFO-exposure_times-Start ------ Exposure Times Updater for oe9z03010 ------
+2021270141903-I-INFO-exposure_times-Using oe9z03010_raw.fits
+2021270141903-I-INFO-exposure_times-For oe9z03cfq, start 2021.270:11:16:14, end 2021.270:11:48:42
+2021270141903-I-INFO-exposure_times-Using oe9z03010_wav.fits
+2021270141903-I-INFO-exposure_times-For oe9z03c9q, start 2021.270:11:04:30, end 2021.270:11:04:40
+2021270141903-I-INFO-exposure_times-Updated 2 qolink_sms exposure times records.
+2021270141903-I-INFO-exposure_times-  End ------ Exposure Times Updater for oe9z03010 ------
+CALBEG ------------ Mon Sep 27 14:19:12 UTC 2021------------------
+
+*** CALSTIS-0 -- Version 3.4.2 (19-Jan-2018) ***
+Begin    27-Sep-2021 14:19:13 UTC
+2021270141913-I--------------- CALSTIS started ---------------------------------
+
+Input    oe9z03010_raw.fits
+
+*** CALSTIS-1 -- Version 3.4.2 (19-Jan-2018) ***
+Begin    27-Sep-2021 14:19:13 UTC
+2021270141913-I--------------- CALSTIS-1 started -------------------------------
+Input    oe9z03010_raw.fits
+Output   oe9z03010_flt.fits
+OBSMODE  TIME-TAG
+APERTURE 6X6
+OPT_ELEM G140L
+DETECTOR FUV-MAMA
+2021270141913-I--------------- Begin processing: OE9Z03010 ---------------------
+
+Imset 1  Begin 14:19:13 UTC
+2021270141913-I--------------- Input read into memory: OE9Z03010 ---------------
+         Heliocentric radial velocity = 20.068 (km/s)
+
+DQICORR  PERFORM
+DQITAB   oref$uce15153o_bpx.fits
+DQITAB   PEDIGREE=GROUND
+DQITAB   DESCRIP =New BPIXTAB with opt_elem column and correct repeller wire flag----
+DQICORR  COMPLETE
+2021270141913-I--------------- DQICORR complete: OE9Z03010 ---------------------
+         Uncertainty array initialized.
+2021270141913-I--------------- Uncertainty array initialized: OE9Z03010 --------
+
+LORSCORR PERFORM
+LORSCORR COMPLETE
+2021270141914-I--------------- LORSCORR complete: OE9Z03010 --------------------
+
+GLINCORR PERFORM
+LFLGCORR PERFORM
+MLINTAB  oref$j9r16559o_lin.fits
+MLINTAB  PEDIGREE=GROUND
+MLINTAB  DESCRIP =T. Danks gathered Info
+MLINTAB  DESCRIP =T. Danks Gathered Info
+GLINCORR COMPLETE
+LFLGCORR COMPLETE
+2021270141914-I--------------- Nonlinearity corr. complete: OE9Z03010 ----------
+
+DARKCORR PERFORM
+DARKFILE oref$q591955ro_drk.fits
+DARKFILE PEDIGREE=INFLIGHT 29/01/2003 03/08/2004
+DARKFILE DESCRIP =Avg of 152 1380s darks from 9615 10034
+DARKCORR COMPLETE
+2021270141914-I--------------- DARKCORR complete: OE9Z03010 --------------------
+
+FLATCORR PERFORM
+PFLTFILE oref$mbj1658bo_pfl.fits
+PFLTFILE PEDIGREE=INFLIGHT 17/03/1998 17/05/2002
+PFLTFILE DESCRIP =On-orbit FUV P-flat created from proposals 7645,8428,8862,8922
+LFLTFILE oref$o481727ao_lfl.fits
+LFLTFILE PEDIGREE=INFLIGHT 06/02/1999 06/02/1999
+LFLTFILE DESCRIP =In-flight low-order flat based on observations of GD 71
+FLATCORR COMPLETE
+2021270141915-I--------------- FLATCORR complete: OE9Z03010 --------------------
+
+PHOTCORR OMIT
+
+DOPPCORR OMIT
+
+STATFLAG PERFORM
+STATFLAG COMPLETE
+2021270141915-I--------------- STATFLAG complete: OE9Z03010 --------------------
+2021270141915-I--------------- Output written to disk: OE9Z03010 ---------------
+Imset 1  End 14:19:15 UTC
+
+End      27-Sep-2021 14:19:15 UTC
+
+*** CALSTIS-1 complete ***
+2021270141915-I--------------- CALSTIS-1 completed: OE9Z03010 ------------------
+
+End      27-Sep-2021 14:19:15 UTC
+
+*** CALSTIS-0 complete ***
+2021270141915-I--------------- CALSTIS completed: OE9Z03010 --------------------
+CALEND ------------ Mon Sep 27 14:19:15 UTC 2021 ------------------
+2021270141925 INFO src=ac_xxx_OWL.run_task fsn=oe9z03010 msg="-------------- After Calibration Started for   oe9z03010 --------------"
+2021270141925 INFO src=ac_xxx_OWL-asn_product_status.banner_start fsn=oe9z03010 msg="Start ------  Association Product Status Updater for oe9z03010  ------"
+2021270141925 INFO src=ac_xxx_OWL-asn_product_status.get_asn_table fsn=oe9z03010 msg="--- ASN: ...oe9z03010_asn.fits"
+2021270141925 INFO src=ac_xxx_OWL-asn_product_status.build_query_list fsn=oe9z03010 msg="The product_status for OE9Z03010 is C"
+2021270141925 INFO src=ac_xxx_OWL-asn_product_status.asn_status_update fsn=oe9z03010 msg="Updated 1 asn_members.product_status record."
+2021270141925 INFO src=ac_xxx_OWL-asn_product_status.banner_end fsn=oe9z03010 msg="  End ------  Association Product Status Updater for oe9z03010  ------"
+2021270141925 INFO src=ac_xxx_OWL-hst_missionquery.__init__ msg="HST_Mission_db connection to ... ..."
+2021270141925 INFO src=ac_xxx_OWL-HstScienceDataset.__init__ fsn=oe9z03010 msg="Opening connection to ..., ..."
+2021270141925 INFO src=ac_xxx_OWL-HstScienceDataset.determine_collected_members fsn=oe9z03010 msg="3 rows found for association oe9z03010"
+2021270141925 INFO src=ac_xxx_OWL-hst_missionquery.get_proposal_id fsn=oe9z03c9q msg="returning 16199 for oe9z03c9q"
+2021270141925 INFO src=ac_xxx_OWL-HstScienceDataset.__init__ fsn=oe9z03010 msg="HstScienceDataset(archive_product='oe9z03010', archive_product_type='PRODUCT', dataset_type='asn', hst_db=<hst_missionquery.HST_Mission_db object at 0x2b3d24b6b130>, instrument='sti', ipppssoot='oe9z03010', log=<Logfile.Logfile object at 0x2b3d24b804f0>, product_exposures={'oe9z03c9q': 'AUTO-WAVECAL', 'oe9z03cfq': 'SCIENCE'}, proposal_id='16199', subproducts={})"
+2021270141925 INFO src=ac_xxx_OWL.update_quality_...s fsn=oe9z03010 msg="No pdq_summary_update records found for oe9z03010."
+2021270141925 INFO src=ac_xxx_OWL.run_task fsn=oe9z03010 msg="-------------- After Calibration Completed for oe9z03010 --------------"

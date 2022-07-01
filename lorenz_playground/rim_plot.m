@@ -1,0 +1,281 @@
+close all;
+clear all;
+addpath("./src")
+fig=figure("Position",[1,1,1200,400]);
+counter2 = 1;
+for ID = [3010,4010]
+which_observation = ID;
+
+if which_observation == 3010
+    observation.file = "./oe9z03011_flt.fits";
+    observation.name = "oe9z03010";
+    observation.x_pcenter = 166;
+    observation.y_pcenter = 349;
+    observation.best_n0   = 820;
+    observation.poly_order = 2;
+    observation.north_pole_angle_direction = 27.0; %deg defined clockwise from horizonatal axis
+
+elseif which_observation == 4010
+    observation.file = "./oe9z04011_flt.fits";
+    observation.name = "oe9z04010";
+    observation.x_pcenter  = 158;
+    observation.y_pcenter  = 361;
+    observation.best_n0    = 1040;
+    observation.poly_order = 3;
+    observation.north_pole_angle_direction = 24.4;
+else
+    error("uknown obseravton")
+end
+
+
+observations_dir   = "/Users/gregorio/Desktop/ganymede_adventure/ganymede_observations";
+filename           = observation.file;
+output_dir         = "./images";
+output_dir_models  = "./images/models";
+
+
+% extract fits data
+GanymedeImage = FitsImageObject;
+GanymedeImage.read_image(fullfile(observations_dir,filename));
+
+%%  PLOT IMAGE
+
+[rows,cols]              = size(GanymedeImage.image);     % find image size
+x_pixel_range_full_image = 1:cols;                        % full image axis range  x
+y_pixel_range_full_image = 1:rows;                        % full images axis range y
+max_intensity            = max(max(GanymedeImage.image)); % define max intensity
+cscale                   = [0,max_intensity];
+
+% dark counts should remain for the analysis, but you don't want
+% to see them in the picture
+
+
+% define subimage outer edge
+
+x_pmin = 70 ; % pixel
+x_pmax = 260; % pixel
+y_pmin = 260; % pixel
+y_pmax = 450; % pixel
+
+% plot borders
+x_square = [x_pmin,x_pmin,x_pmax,x_pmax];
+y_square = [y_pmin,y_pmax,y_pmin,y_pmax];
+
+
+%% RESIZE IMAGE
+[ganymede_centred_subimage,sigma_matrix_ganymede_centred_subimage] = GanymedeImage.resize_image(x_pmin,x_pmax,y_pmin,y_pmax);
+x_pixel_range_ganymede_centred_subimage     = x_pixel_range_full_image(x_pixel_range_full_image<=x_pmax & x_pixel_range_full_image>= x_pmin);
+y_pixel_range_ganymede_centred_subimage     = y_pixel_range_full_image(y_pixel_range_full_image<=y_pmax & y_pixel_range_full_image>= y_pmin);
+
+
+%% CENTER DEFINITION
+
+% floor(diameter/2) and center by eye (referenced to the full image)
+diameter_ganymede    = 70.373;   % define floor(diameter_ganymede/2) so that diameter_ganymede is an odd number (makes easy to have a center than)
+x_pixel_center       = observation.x_pcenter ;      % define center of the image by eye on the big image
+y_pixel_center       = observation.y_pcenter ;    % define center of the image by eye on the big image
+box_radial_extension = 1.5;      % box around the ganymede to be eliminated 
+                                 % from the fit expressed is ganymedes radii
+                         
+x_index_center_ganymede_centred_subimage = find(x_pixel_range_ganymede_centred_subimage == x_pixel_center); % index of the center in the x_range_sub
+y_index_center_ganymede_centred_subimage = find(y_pixel_range_ganymede_centred_subimage == y_pixel_center); % index of the center in the y_range_sub
+
+%% CONVERSION FROM COUNTS TO REYLIGHTS
+
+exposition_time =  GanymedeImage.find_key("TEXPTIME"); %s
+mx              =  0.0246;     % field of view x dierction [arsec]
+my              =  0.0246;     % field of view y dierction [arsec]
+A_mirror        =  45238.9342; % cm2
+
+filter_data   = dlmread("HST_STIS_FUV.25MAMA_G140L.dat");
+wavelength    = filter_data(:,1);
+throughput    = filter_data(:,2);
+throughput_Ly = interp1(wavelength,throughput,1216);
+A_eff         = A_mirror*throughput_Ly;
+Omega         = mx*my*(2*pi/3600/360)^2;
+
+count2KRayleight = 4*pi/10^6/(exposition_time*Omega*A_eff)*10^-3;
+ganymede_centred_subimage_reyleights = ganymede_centred_subimage*count2KRayleight;
+sigma_matrix_ganymede_centred_subimage_reyleights = sigma_matrix_ganymede_centred_subimage*count2KRayleight;
+
+
+%% FIT THE MODEL
+% assumed ganymede brightness
+ganymede_assumed_brightness = 1.3; % KReyleights
+
+% decide max order for background polynomial surface
+poly_order = observation.poly_order;
+
+syms n0
+syms a [poly_order+1,poly_order+1] 
+syms x y
+
+polynomial_surface = 0;
+for ii=0:poly_order
+    for jj =0:poly_order-ii
+        polynomial_surface = polynomial_surface + a(ii+1,jj+1)*x^ii*y^jj;
+    end
+end
+
+zc        = 1.9*10^-13;
+Rg        = 2643.1e5;
+R_ganymede_pixel  = diameter_ganymede/2;
+
+% absorption model outside ganymede disk
+Nh  = n0*Rg*(R_ganymede_pixel./sqrt(x.^2+y.^2)).*pi;
+tau = zc*Nh;
+T   = exp(-tau);
+
+% Define point spread function
+PSF = imread("fuvmama_1216_00.fits"); % point spread function
+[rows_psf,cols_psf] = size(PSF);
+
+% Expand axis definition to eliminate noise after convolution
+right_expansion =  max(x_pixel_range_ganymede_centred_subimage)+1:max(x_pixel_range_ganymede_centred_subimage)+cols_psf*2;   % 2 is just a sefty margin
+left_expansion  =  (min(x_pixel_range_ganymede_centred_subimage)-cols_psf*2):min(x_pixel_range_ganymede_centred_subimage)-1; % 2 is just a sefty margin
+up_expansion    =  max(y_pixel_range_ganymede_centred_subimage)+1:max(y_pixel_range_ganymede_centred_subimage)+rows_psf*2;   % 2 is just a sefty margin
+down_expansion  =  (min(y_pixel_range_ganymede_centred_subimage)-cols_psf*2):min(y_pixel_range_ganymede_centred_subimage)-1; % 2 is just a sefty margin
+
+x_expanded_axis = [left_expansion,x_pixel_range_ganymede_centred_subimage,right_expansion];
+y_expanded_axis = [down_expansion,y_pixel_range_ganymede_centred_subimage,up_expansion];
+x_original_mask = boolean([zeros(size(left_expansion)),ones(size(x_pixel_range_ganymede_centred_subimage)),zeros(size(right_expansion))]);
+y_original_mask = boolean([zeros(size(down_expansion)),ones(size(y_pixel_range_ganymede_centred_subimage)),zeros(size(up_expansion))]);
+
+
+% create grid for bightness extraction
+[rows,cols] = size(ganymede_centred_subimage_reyleights);
+
+%create pixel mask for ganymede_centred image with (0,0) at ganymede center
+[X_gird_ganymede_centred_subimage,Y_gird_ganymede_centred_subimage] = meshgrid(x_pixel_range_ganymede_centred_subimage- x_pixel_center,y_pixel_range_ganymede_centred_subimage-y_pixel_center);
+
+%create pixel mask for expanded image
+[X_grid_model,Y_grid_model] = meshgrid(x_expanded_axis- x_pixel_center ,y_expanded_axis- y_pixel_center );
+
+brightness_mask                          = sqrt(X_gird_ganymede_centred_subimage.^2 + Y_gird_ganymede_centred_subimage.^2) < R_ganymede_pixel/2; % only for finding a brightness value take the brightness in half the radius of the ganymede
+ganymede_mask_for_ganymede_centred_subimage = sqrt(X_gird_ganymede_centred_subimage.^2 + Y_gird_ganymede_centred_subimage.^2) < R_ganymede_pixel;   % mask covering the ganymede disk in ganymede_centred image
+ganymede_mask_for_model_image            = sqrt(X_grid_model.^2 + Y_grid_model.^2) < R_ganymede_pixel;   % this the mask covering the ganymede in the expanded image
+
+mean_brightness_ganymede = mean(mean(ganymede_centred_subimage_reyleights(brightness_mask)));
+IPMandGEO                = mean_brightness_ganymede - ganymede_assumed_brightness;
+IPMandGEO_counts         = IPMandGEO/count2KRayleight;
+
+% adjust sigma values
+sigma_matrix_ganymede_centred_subimage_reyleight   = sqrt(sigma_matrix_ganymede_centred_subimage.^2+IPMandGEO_counts)*count2KRayleight;
+
+
+mean_brightness_ganymede             = mean_brightness_ganymede - IPMandGEO;
+
+ganymede_centred_subimage_reyleights    = ganymede_centred_subimage_reyleights - IPMandGEO;
+
+% obtain polynomial fit of the image
+% the x and y axis must be centered with zero at the ganymede center.
+% Otherwise the transmission model won't work
+[x_fit,y_fit,z_fit,weights_fit] = prepareSurfaceData(X_gird_ganymede_centred_subimage,Y_gird_ganymede_centred_subimage,ganymede_centred_subimage_reyleights,1./sigma_matrix_ganymede_centred_subimage_reyleight.^2);
+
+exclude_set = ~excludedata(x_fit,y_fit,'box',[-box_radial_extension*R_ganymede_pixel ,...
+                                              +box_radial_extension*R_ganymede_pixel ,...
+                                              -box_radial_extension*R_ganymede_pixel ,...
+                                              + box_radial_extension*R_ganymede_pixel]);
+% backgroumd surface model
+total_model_sym     = polynomial_surface.*T ; % background surface plus the Transmission
+total_model         = matlabFunction(total_model_sym);
+fit_parameters      = string(symvar(total_model_sym));
+
+% eliminate variables that are not to be fit in the model
+eliminate_xyn0_mask = string(symvar(total_model_sym)) ~= 'x' & ...
+                      string(symvar(total_model_sym)) ~= 'y' &  ...
+                      string(symvar(total_model_sym)) ~= 'n0';
+
+fit_parameters      = cellstr(fit_parameters(eliminate_xyn0_mask));
+
+myfittype = fittype(total_model,...
+                     'dependent',{'z'},'independent',{'x','y'},...
+                     'coefficients',fit_parameters ,'problem','n0');
+options = fitoptions(myfittype);
+
+coefficients_upperbound = +10000;
+coefficients_lowerbound = -10000;
+
+options.Upper      = ones(1,length(fit_parameters))*coefficients_upperbound;
+options.Lower      = ones(1,length(fit_parameters))*coefficients_lowerbound;
+mid_point_bound    = (coefficients_upperbound+coefficients_lowerbound)/2;
+options.Exclude    = exclude_set;
+options.StartPoint = zeros(1,length(fit_parameters))*mid_point_bound;
+% options.Weights    = weights_fit;
+
+counter = 1;
+decimation_error_bar = 5;
+
+
+for n0_value=observation.best_n0
+   
+    model_fit = fit([x_fit,y_fit],z_fit,myfittype,options,"problem",n0_value);
+    % create model image from fit
+    bkg_only_model_image = double(model_fit(X_grid_model,Y_grid_model));
+   
+    
+   
+    
+    % assume constant brightness at disk as constant
+    row_model_with_ganymede = bkg_only_model_image;
+    row_model_with_ganymede(ganymede_mask_for_model_image)  = mean_brightness_ganymede;  
+    
+    final_model_image_PSF                         = conv2(row_model_with_ganymede,PSF,'same');% apply PSF
+    final_model_image_PSF                         = final_model_image_PSF(y_original_mask,x_original_mask);
+    rsw_model_image                               = row_model_with_ganymede(y_original_mask,x_original_mask); % image size before the PSF convolution is applied
+      
+    
+    % Radial analysis of the images 
+   
+    inner_radius = R_ganymede_pixel*1.0;
+    outer_radius = R_ganymede_pixel*1.2;
+    number_of_bins   = 24; 
+    xcenter          = x_index_center_ganymede_centred_subimage;    
+    ycenter          = y_index_center_ganymede_centred_subimage;    
+      
+    difference_image = ganymede_centred_subimage_reyleights-final_model_image_PSF;
+    [mean_along_bin_ganymede_centred_subimage,center_angles_range_dense,error_per_bin] = radial_bins_average(ganymede_centred_subimage_reyleights,xcenter,ycenter,inner_radius,outer_radius,number_of_bins,sigma_matrix_ganymede_centred_subimage_reyleight);
+    [mean_along_bin_model_image,center_angles_range]   = radial_bins_average(final_model_image_PSF,xcenter,ycenter,inner_radius,outer_radius,number_of_bins);
+    
+
+
+    mean_normalization_factor =mean(mean_along_bin_ganymede_centred_subimage)/mean(mean_along_bin_model_image)
+    mean_along_bin_model_image = mean_along_bin_model_image* mean_normalization_factor;
+    center_angles_range = center_angles_range*180/pi-observation.north_pole_angle_direction;; % center north pole at zero
+    center_angles_range_dense = center_angles_range_dense*180/pi-observation.north_pole_angle_direction;
+    
+    if counter ==1 
+        rim_plot_ax4 = formal_axes(subplot(2,2,counter2));
+        hold on
+        plot(rim_plot_ax4,center_angles_range_dense,mean_along_bin_ganymede_centred_subimage,"-ob","DisplayName","STIS observation")
+        fill(rim_plot_ax4,[center_angles_range_dense ,fliplr(center_angles_range_dense )],[mean_along_bin_ganymede_centred_subimage+error_per_bin,fliplr(mean_along_bin_ganymede_centred_subimage-error_per_bin)],[0.7,0.7,0.7],"FaceAlpha",0.4,'linestyle','none',"HandleVisibility","off")
+        xline(0,"-k","North",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(-180,"-k","South",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        rim_plot_ax4.XLabel.String = "Angle from North $[deg]$";
+        rim_plot_ax4.YLabel.String = "Brightness $[kR]$";
+        rim_plot_ax4.Title.String = upper(observation.name);
+
+        rim_plot_ax5 = formal_axes(subplot(2,2,counter2+2));
+        hold on
+        rim_plot_ax5.YLabel.String="$\frac{Obs-Mod}{\sigma}$";
+        rim_plot_ax5.XLabel.String="Angle from North $[deg]$";
+        xline(0,"-k","North",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        xline(-180,"-k","South",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
+        rim_plot_ax5.YLim = [-3,3];
+
+    end
+    plot(rim_plot_ax4,center_angles_range,mean_along_bin_model_image,"-ok","DisplayName","normalised model")
+    plot(rim_plot_ax5,center_angles_range,(mean_along_bin_ganymede_centred_subimage-mean_along_bin_model_image)./error_per_bin,"-ok");
+        
+    counter = counter +1;
+
+end
+legend(rim_plot_ax4,"location","south");
+counter2 = counter2+1;
+end
+    
+
