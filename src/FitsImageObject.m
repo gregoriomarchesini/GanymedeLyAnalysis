@@ -120,6 +120,8 @@ classdef FitsImageObject < handle
             % obtain the axis conversion for plots
             % example - from pixel to spatial position
             %         - from pixel to wavelength
+            % Returns y_new - spatial position
+            %         x_new - wavelength
             
             [crpx1 ,~]  =obj.find_key("CRPIX1","extension","Image");
             [crpx2,~]   =obj.find_key("CRPIX2","extension","Image");

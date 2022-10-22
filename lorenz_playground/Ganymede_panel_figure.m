@@ -1,14 +1,14 @@
 close all;
 clear all;
-addpath("./src")
 
-panel_figure = figure("Units","inches","Position",[1,1,7.1,8]);
+
+panel_figure = figure("Units","inches","Position",[1,1,10,8]);
 counter = 1
 
 for observation_ID= [4010,3010];
 
     if  observation_ID == 3010
-        observation.file = "./oe9z03011_flt.fits";
+        observation.file = "oe9z03011_flt.fits";
         observation.name = "oe9z03010";
         observation.x_pcenter = 166;
         observation.y_pcenter = 349;
@@ -17,7 +17,7 @@ for observation_ID= [4010,3010];
         observation.north_pole_angle_direction = 27.0; %deg defined clockwise from horizonatal axis
 
     elseif  observation_ID == 4010
-        observation.file = "./oe9z04011_flt.fits";
+        observation.file = "oe9z04011_flt.fits";
         observation.name = "oe9z04010";
         observation.x_pcenter = 158;
         observation.y_pcenter = 361;
@@ -28,7 +28,7 @@ for observation_ID= [4010,3010];
         error("uknown obseravton")
     end
 
-    observations_dir   = "/Users/gregorio/Desktop/ganymede_adventure/ganymede_observations";
+    observations_dir   = "../ganymede_observations";
 
     % extract fits data
     GanymedeImage = FitsImageObject;
@@ -45,18 +45,28 @@ for observation_ID= [4010,3010];
     % to see them in the picture
 
 
-    ax   = formal_axes(subplot(2,2,counter));
-    hold on
+    ax   = subplot(2,2,counter);
     imagesc(ax,GanymedeImage.image,cscale);
+    hold on
     ax.XLim = [1,cols];
     ax.YLim = [1,rows];
-    ax.XLabel.String = "pixel"
     ax.YLabel.String = "pixel"
     ax.Title.String  = upper(observation.name)
+    ax.XMinorTick = "on"
+    ax.LineWidth = 2;
+    ax.Box = "on";
+    ax.BoxStyle ="full";
     color_bar_instance = formal_colorbar(colorbar(ax));
     color_bar_instance.Label.String = "counts"
+    color_bar_instance.Ticks = [0:10:40];
+    clim([0 40])
 
-
+    ax_under = doubleXAxis(ax);
+    hold on
+    [x_wavelength,~] = GanymedeImage.obtain_axis_conversions();
+    ax_under.XLim = [x_wavelength(1),x_wavelength(end)];
+    ax_under.XTick = 1100:100:1700;
+    ax_under.XLabel.String = "pixel/Wavelength (A)"
     % define subimage outer edge
 
     x_pmin = 70 ; % pixel
@@ -112,15 +122,25 @@ for observation_ID= [4010,3010];
     max_intensity            = max(max(ganymede_centred_subimage_reyleights)); % define max intensity
     cscale                   = [0,max_intensity];
 
-    ax   = formal_axes(subplot(2,2,counter+2));
+    ax   = subplot(2,2,counter+2);
     hold on
     imagesc(ax,xcorner,ycorner,ganymede_centred_subimage_reyleights,cscale);
+    
     ax.XLim = [x_pixel_range_ganymede_centred_subimage(1),x_pixel_range_ganymede_centred_subimage(end)];
     ax.YLim = [y_pixel_range_ganymede_centred_subimage(1),y_pixel_range_ganymede_centred_subimage(end)];
     ax.XLabel.String = "pixel"
     ax.YLabel.String = "pixel"
+    ax.XMinorTick = "on"
+    ax.YMinorTick = "on"
+    ax.LineWidth = 4;
+    ax.Box = "on";
+    ax.BoxStyle ="full";
     color_bar_instance = formal_colorbar(colorbar());
-    color_bar_instance.Label.String = "Brightness [kR]"
+    color_bar_instance.Label.String = "Brightness [kR]";
+    color_bar_instance.Ticks = [0:10:25];
+    clim([0 25]);
+
 
     counter = counter+1;
+    
 end

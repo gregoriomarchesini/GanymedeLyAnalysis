@@ -1,15 +1,9 @@
 function [colorbar]=formal_colorbar(colorbar)
 % predefined set of specifications for plots
 
-colorbar.XLabel.Interpreter = "latex";
-colorbar.XLabel.FontSize    = 14;
-colorbar.XLabel.FontWeight  = "bold";
+colorbar.XLabel.FontSize    = 12;
 
-colorbar.YLabel.Interpreter = "latex";
-colorbar.YLabel.FontSize    = 14;
-colorbar.YLabel.FontWeight  = "bold";
-
-colorbar.TickLabelInterpreter = 'latex'
+colorbar.YLabel.FontSize    = 12;
 
 colorbar.Box                = "On";
 colorbar.LineWidth          = 1.3;
