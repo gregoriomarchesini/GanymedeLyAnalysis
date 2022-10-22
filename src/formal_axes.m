@@ -9,9 +9,6 @@ ax.XLabel.FontSize     = 12;
 ax.YLabel.FontSize     = 12;
 
 ax.Title.FontSize     = 13;
-
-
-
 ax.GridColor          = [0,0,0];
 ax.GridAlpha          = 0.1;
 ax.GridLineStyle      = "--";
