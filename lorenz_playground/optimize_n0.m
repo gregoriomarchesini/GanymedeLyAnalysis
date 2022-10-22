@@ -145,8 +145,8 @@ down_expansion  =  (min(y_pixel_range_ganymede_centred_subimage)-cols_psf*2):min
 
 x_expanded_axis = [left_expansion,x_pixel_range_ganymede_centred_subimage,right_expansion];
 y_expanded_axis = [down_expansion,y_pixel_range_ganymede_centred_subimage,up_expansion];
-x_original_mask = boolean([zeros(size(left_expansion)),ones(size(x_pixel_range_ganymede_centred_subimage)),zeros(size(right_expansion))]);
-y_original_mask = boolean([zeros(size(down_expansion)),ones(size(y_pixel_range_ganymede_centred_subimage)),zeros(size(up_expansion))]);
+x_original_mask = logical([zeros(size(left_expansion)),ones(size(x_pixel_range_ganymede_centred_subimage)),zeros(size(right_expansion))]);
+y_original_mask = logical([zeros(size(down_expansion)),ones(size(y_pixel_range_ganymede_centred_subimage)),zeros(size(up_expansion))]);
 
 
 % create grid for bightness extraction

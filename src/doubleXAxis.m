@@ -1,4 +1,10 @@
 function ax = doubleXAxis(targetAxes)
+% Gregorio Marchesini 
+% 22.10.2022
+%
+% Creates second X axis below a given target axes object
+% Returns an axes object that can be edited as any other normal axes object
+
 ax = axes();
 ax.Units = "normalized";
 
