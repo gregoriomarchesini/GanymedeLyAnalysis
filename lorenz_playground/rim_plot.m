@@ -1,6 +1,6 @@
 close all;
 clear all;
-addpath("./src")
+addpath("../src")
 fig=figure("Position",[1,1,1200,400]);
 counter2 = 1;
 for ID = [3010,4010]
@@ -28,7 +28,7 @@ else
 end
 
 
-observations_dir   = "/Users/gregorio/Desktop/ganymede_adventure/ganymede_observations";
+observations_dir   = "../ganymede_observations";
 filename           = observation.file;
 output_dir         = "./images";
 output_dir_models  = "./images/models";
@@ -253,14 +253,14 @@ for n0_value=observation.best_n0
         xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
         xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
         xline(-180,"-k","South",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
-        rim_plot_ax4.XLabel.String = "Angle from North $[deg]$";
-        rim_plot_ax4.YLabel.String = "Brightness $[kR]$";
+        rim_plot_ax4.XLabel.String = "Angle from North [deg]";
+        rim_plot_ax4.YLabel.String = "Brightness [kR]";
         rim_plot_ax4.Title.String = upper(observation.name);
 
         rim_plot_ax5 = formal_axes(subplot(2,2,counter2+2));
         hold on
-        rim_plot_ax5.YLabel.String="$\frac{Obs-Mod}{\sigma}$";
-        rim_plot_ax5.XLabel.String="Angle from North $[deg]$";
+        rim_plot_ax5.YLabel.String="[Obs-Mod]/\sigma";
+        rim_plot_ax5.XLabel.String="Angle from North [deg]";
         xline(0,"-k","North",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
         xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")
         xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off",Interpreter="latex")

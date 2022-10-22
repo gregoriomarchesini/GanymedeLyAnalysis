@@ -5,7 +5,7 @@ arguments
     radius double {mustBePositive} 
     ax     = gca()
     options.LineWidth double {mustBePositive} =1
-    options.Color 
+    options.Color  = "k";
     options.HandleVisibility string {mustBeMember(options.HandleVisibility,["on","off"])}= "off"
 end
 

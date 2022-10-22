@@ -96,10 +96,9 @@ y_pixel_range_ganymede_centred_subimage     = y_pixel_range_full_image(y_pixel_r
 
 %% CENTER DEFINITION
 
-% floor(diameter/2) and center by eye (referenced to the full image)
-diameter_ganymede    = 70.373;   % define floor(diameter_ganymede/2) so that diameter_ganymede is an odd number (makes easy to have a center than)
-x_pixel_center       = observation.x_pcenter ;      % define center of the image by eye on the big image
-y_pixel_center       = observation.y_pcenter ;    % define center of the image by eye on the big image
+diameter_ganymede    = 70.373;  % from computation
+x_pixel_center       = observation.x_pcenter ;     
+y_pixel_center       = observation.y_pcenter ;   
 box_radial_extension = 1.5;      % box around the ganymede to be eliminated 
                                  % from the fit expressed is ganymedes radii
                          
@@ -481,7 +480,7 @@ for n0_value=observation.best_n0
        hold on
        plot(boxing_ax1,(y_pixel_range_ganymede_centred_subimage-y_pixel_center)/R_ganymede_pixel,ganymede_centred_subimage_vertical_box_plot,"DisplayName","STIS observation")
        errorbar(boxing_ax1,(y_pixel_range_ganymede_centred_subimage((1:decimation_error_bar:end))-y_pixel_center)/R_ganymede_pixel,ganymede_centred_subimage_vertical_box_plot((1:decimation_error_bar:end)),error_bar_vertical_box_plot((1:decimation_error_bar:end)),'o',"HandleVisibility","off")
-       boxing_ax1.XLabel.String = "$r_{\mathcal{G}}$";
+       boxing_ax1.XLabel.String = "r_G";
        boxing_ax1.YLabel.String = "Brightness $[kR]$";
        boxing_ax1.Title.String = "Vertical box around the ganymede";
     end
@@ -494,8 +493,8 @@ for n0_value=observation.best_n0
        hold on
        plot(boxing_ax2,(x_pixel_range_ganymede_centred_subimage-x_pixel_center)/R_ganymede_pixel,ganymede_centred_subimage_horizontal_box_plot,"DisplayName","STIS observation")
        errorbar(boxing_ax2,(x_pixel_range_ganymede_centred_subimage((1:decimation_error_bar:end))-x_pixel_center)/R_ganymede_pixel,ganymede_centred_subimage_horizontal_box_plot((1:decimation_error_bar:end)),error_bar_horizontal_box_plot((1:decimation_error_bar:end)),'o',"HandleVisibility","off")
-       boxing_ax2.XLabel.String = "$r_{\mathcal{G}}$";
-       boxing_ax2.YLabel.String = "Brightness $[kR]$";
+       boxing_ax2.XLabel.String = "r_G";
+       boxing_ax2.YLabel.String = "Brightness [kR]";
        boxing_ax2.Title.String = "Horizontal box around the ganymede";
     end
     plot(boxing_ax2,(x_pixel_range_ganymede_centred_subimage-x_pixel_center)/R_ganymede_pixel,model_image_horizontal_box_plot,"DisplayName",sprintf("n0 = %.2f, chi= %.4f",[n0_value,chi2_hor]))
@@ -506,8 +505,8 @@ for n0_value=observation.best_n0
         hold on
         plot(boxing_ax3,radial_range/R_ganymede_pixel,ganymede_centred_subimage_radial_plot,"DisplayName","STIS observation")
         errorbar(boxing_ax3,radial_range((1:decimation_error_bar:end))/R_ganymede_pixel,ganymede_centred_subimage_radial_plot((1:decimation_error_bar:end)),error_bar_radial_plot((1:decimation_error_bar:end)),'o',"HandleVisibility","off")
-        boxing_ax3.XLabel.String = "$r_{\mathcal{G}}$";
-        boxing_ax3.YLabel.String = "Brightness $[kR]$";
+        boxing_ax3.XLabel.String = "r_G";
+        boxing_ax3.YLabel.String = "Brightness [kR]";
         boxing_ax3.Title.String = "Radial average value";
     end
     plot(boxing_ax3,radial_range/R_ganymede_pixel,model_image_radial_plot,"DisplayName",sprintf("n0 = %.2f, chi= %.4f",[n0_value,chi2_rad]))
@@ -542,13 +541,13 @@ for n0_value=observation.best_n0
         xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off")
         xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off")
         xline(-180,"-k","South",LabelVerticalAlignment="top",HandleVisibility="off")
-        rim_plot_ax4.XLabel.String = "Angle from North $[deg]$";
-        rim_plot_ax4.YLabel.String = "Brightness $[kR]$";
+        rim_plot_ax4.XLabel.String = "Angle from North [deg]";
+        rim_plot_ax4.YLabel.String = "Brightness [kR]";
 
         rim_plot_ax5 = formal_axes(subplot(2,1,2));
         hold on
-        rim_plot_ax5.YLabel.String="$\frac{Obs-Mod}{\sigma}$";
-        rim_plot_ax5.XLabel.String="Angle from North $[deg]$";
+        rim_plot_ax5.YLabel.String="[Obs-Mod]/\sigma";
+        rim_plot_ax5.XLabel.String="Angle from North [deg]";
         xline(0,"-k","North",LabelVerticalAlignment="top",HandleVisibility="off")
         xline(-90,"-k","East",LabelVerticalAlignment="top",HandleVisibility="off")
         xline(90,"-k","West",LabelVerticalAlignment="top",HandleVisibility="off")

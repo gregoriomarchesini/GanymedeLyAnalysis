@@ -7,11 +7,14 @@ arguments
     outer_radius double {mustBePositive} ;
     n_bins double {mustBePositive} ;
     ax     = gca();
-    options.Color   
+    options.Color  = "k";
     options.LineWidth double {mustBePositive} = 1;
     options.HandleVisibility string {mustBeMember(options.HandleVisibility,["on","off"])}= "off";
 end
 
+if nargin <5
+    error("Not enough inputs")
+end
 angle_range=linspace(-pi,pi,n_bins);
 angle_range=angle_range(1:end-1);
 
@@ -20,9 +23,8 @@ for angle=angle_range
     x =  center(1) + [inner_radius outer_radius]*cos(angle);
     y =  center(2) + [inner_radius outer_radius]*sin(angle);
     
-    plot(x,y,LineWidth = options.LineWidth,Color=options.Color,HandleVisibility=options.HandleVisibility);
+    plot(x,y,"LineWidth",options.LineWidth,"color",options.Color,"HandleVisibility",options.HandleVisibility);
 end
-
 draw_circle(center,inner_radius,ax,Color=options.Color,LineWidth=options.LineWidth,HandleVisibility=options.HandleVisibility)
 draw_circle(center,outer_radius,ax,Color=options.Color,LineWidth=options.LineWidth,HandleVisibility=options.HandleVisibility)
 end

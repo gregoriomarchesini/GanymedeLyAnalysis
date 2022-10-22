@@ -97,10 +97,10 @@ y_pixel_range_ganymede_centred_subimage     = y_pixel_range_full_image(y_pixel_r
 
 %% CENTER DEFINITION
 
-% floor(diameter/2) and center by eye (referenced to the full image)
-diameter_ganymede    = 70.373;   % define floor(diameter_ganymede/2) so that diameter_ganymede is an odd number (makes easy to have a center than)
-x_pixel_center       = observation.x_pcenter;      % define center of the image by eye on the big image
-y_pixel_center       = observation.y_pcenter;    % define center of the image by eye on the big image
+
+diameter_ganymede    = 70.373;   % from computation
+x_pixel_center       = observation.x_pcenter;    % to be optimised for
+y_pixel_center       = observation.y_pcenter;    % to be optimised for
 box_radial_extension = 1.5;      % box around the ganymede to be eliminated 
                                  % from the fit expressed is ganymedes radii
                          

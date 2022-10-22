@@ -5,16 +5,10 @@ if nargin == 0
     ax = gca();
 end
 
-ax.XLabel.Interpreter  = 'latex';
-ax.XLabel.FontSize     = 14;
-ax.XLabel.FontWeight   = "Bold";
+ax.XLabel.FontSize     = 12;
+ax.YLabel.FontSize     = 12;
 
-
-ax.YLabel.FontSize     = 14;
-ax.YLabel.FontWeight   = "Bold";
-
-ax.Title.FontSize     = 16;
-ax.Title.FontWeight   = "Bold";
+ax.Title.FontSize     = 13;
 
 
 

@@ -92,9 +92,9 @@ for observation_ID= [4010,3010]
 
     %% CENTER DEFINITION
 
-    diameter_ganymede    = 70.373;  % from computation using earth distance form Ganymede at given date and from Hubble Detector pixel angular resolution
-    x_pixel_center       = observation.x_pcenter ;   
-    y_pixel_center       = observation.y_pcenter ;   
+    diameter_ganymede    = 70.373;  % from computation using earth distance form Gan
+    x_pixel_center       = observation.x_pcenter ;      % define center of the image by eye on the big image
+    y_pixel_center       = observation.y_pcenter ;    % define center of the image by eye on the big image
     box_radial_extension = 1.5;      % box around the ganymede to be eliminated
     % from the fit expressed is ganymedes radii
 
@@ -143,8 +143,6 @@ for observation_ID= [4010,3010]
     color_bar_instance.Label.String = "Brightness [kR]";
     color_bar_instance.Ticks = 0:10:25;
     clim([0 25]);
-
-    draw_circle([observation.x_pcenter,observation.y_pcenter],diameter_ganymede/2,ax)
     
 
 
