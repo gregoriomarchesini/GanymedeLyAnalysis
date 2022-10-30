@@ -25,8 +25,10 @@ function varargout = generate_radial_plot(image,col_index_center,row_index_cente
     % --------
     % (*) optional 
     %
-    % radial_plot          (array(1,:)) : average brightness along the verticla
-    % radial_range         (array(1,:)) : radial range applied 
+    % radial_plot          (array(1,:)) : average brightness computed along
+    %                                     the sequence of anulus
+    % radial_range         (array(1,:)) : center radius of each annulus
+    %                                     (r_min + r_max)/2
     % error_bar_values (*) (array(1,:)) : error bar derived by the given
     %                                     standard deviation matrix (only if weight matrix is given)
     
@@ -55,27 +57,24 @@ Xmap        = Xmap - col_index_center;
 Ymap        = Ymap - row_index_center;
 R_map       = sqrt(Xmap.^2 + Ymap.^2);
 
-radius_range      = 1:ring_thikness:max_pixel_radius;
-image_radial_mean = zeros(1,length(radius_range));
-error_bar_width   = zeros(1,length(radius_range));
+radius_range      = 0:ring_thikness:max_pixel_radius;
+mid_points_range  = mid_points(radius_range);
+image_radial_mean = zeros(1,length(radius_range)-1);
+error_bar_width   = zeros(1,length(radius_range)-1);
 
 
-
-
-counter = 1;
-for r = radius_range
+for jj = 1:(length(radius_range)-1)
     
-    r_mask = R_map>=r & R_map<=(r+ring_thikness);
-    image_radial_mean(counter)  = mean(image(r_mask));
+    r_mask = R_map>=radius_range(jj) & R_map<=(radius_range(jj+1));
+    image_radial_mean(jj) = mean(image(r_mask));
 
     if nargin==6
-      error_bar_width(counter)    = sqrt(sum(sigma_matrix(r_mask).^2))/numel(sigma_matrix(r_mask));
+      error_bar_width(jj)    = sqrt(sum(sigma_matrix(r_mask).^2))/numel(sigma_matrix(r_mask));
     end
-
-      counter = counter+1;
 end
+
  varargout{1} = image_radial_mean;
- varargout{2} = radius_range  ;
+ varargout{2} = mid_points_range;
 if nargin==6
   varargout{3}  = error_bar_width;
 end

@@ -1,0 +1,59 @@
+commit 882920a4c2a208366b996cf5a78f52d3ad0159b2
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Sat Oct 22 15:56:15 2022 +0200
+
+    last change on thicks width on ganymede panel image
+
+commit e40a60947fa080f9beb694936c477871b660ae39
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Sat Oct 22 15:47:57 2022 +0200
+
+    added short description at doubleAxis function
+
+commit 0bc97cc5c653eb5dc69fd5feba8f73ddbb59814f
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Sat Oct 22 15:19:34 2022 +0200
+
+    Final Cleaning
+
+commit 1c1ca40d575166bd2a7b3bacf4f5730b7b7d19e1
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Sat Oct 22 14:50:41 2022 +0200
+
+    Added the circle on Ganymede
+
+commit 97be216aa837aadad4b010b3e852132f24d1204d
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Sat Oct 22 13:18:56 2022 +0200
+
+    Double Axis Figure introduced. Code modified to eliminate latex interpreded labels
+
+commit 7bcce4d708adb2cc5e2720690d3c04f0e847ec5f
+Author: Gregorio Marchesini <71294988+Marchesini010126@users.noreply.github.com>
+Date:   Thu Jul 21 17:22:22 2022 +0200
+
+    Update README.md
+
+commit fbbbfc6972f36da5a1230ecd489a62cc94e14f92
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Thu Jul 21 17:02:36 2022 +0200
+
+    pdf image added
+
+commit 3ca33e70df958808d3c5a70b28562814ab4956b5
+Author: Gregorio Marchesini <71294988+Marchesini010126@users.noreply.github.com>
+Date:   Thu Jul 21 16:55:11 2022 +0200
+
+    Update README.md
+
+commit 068a3c561343ce96eaca5cc63b57ff0f7122ff29
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Fri Jul 1 20:19:35 2022 +0200
+
+    the adventure starts
+
+commit 0a05eaf2a87f01bb05e4b36dac0759d25aa8d29e
+Author: Gregorio <gregorio.marchesini@gmail.com>
+Date:   Fri Jul 1 20:18:30 2022 +0200
+
+    first commit
